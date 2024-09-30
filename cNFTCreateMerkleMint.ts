@@ -10,6 +10,7 @@ import { publicKey } from '@metaplex-foundation/umi';
 import { readCsv } from './utils';
 import { fetchMerkleTree, mintToCollectionV1, mplBubblegum, createTree } from '@metaplex-foundation/mpl-bubblegum';
 import { Connection, LAMPORTS_PER_SOL, PublicKey, clusterApiUrl } from '@solana/web3.js';
+import { myKey } from './key';
 
 
 const collectionName = "Solana Fellowship Session 8"
@@ -19,21 +20,14 @@ const collectUrl  = "https://amber-electrical-marten-124.mypinata.cloud/ipfs/QmR
 const imageUrl  = "https://amber-electrical-marten-124.mypinata.cloud/ipfs/Qmdd68nJeyEvXt91RBY7GnpqYrpeDN68yAekEyg6xAD9DM"
 const itemUrl = "https://amber-electrical-marten-124.mypinata.cloud/ipfs/QmRhwC2aXWMid3KsbCA7dmNA2xgaSKzBerhYpPKXKHzvKg"
 
-const merkleMaxDepth = 14
-const merkleBufferSize = 64
+const merkleMaxDepth = 5
+const merkleBufferSize = 8
 const rpcURL =
   (process.env.NODE_ENV === 'production'
     ? process.env.SOLANA_MAINNET_RPC_URL
     : process.env.SOLANA_DEVNET_RPC_URL) || 'https://api.devnet.solana.com';
 
-const secretKey = new Uint8Array([
-  60, 191,  34, 200,  83, 127, 230, 200,  46, 156,   9,
- 233, 196, 236,  75, 142, 230,  60, 104,  28,  16, 237,
- 151, 119,  46,  90,  92,  25, 165,  64, 141, 122, 247,
-  25, 145, 141, 242,  71, 130, 230, 229, 122,  92, 148,
-  79,  50,  51, 228, 123, 114, 254, 199, 120,  54,  39,
-  33, 186,  38,  31, 227, 164, 221, 197, 192
-]);
+const secretKey = myKey;
 
 
 export const createNFTCollection = async () => {
